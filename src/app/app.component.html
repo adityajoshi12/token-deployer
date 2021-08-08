@@ -1,0 +1,58 @@
+<mat-toolbar color="primary">ERC20 Token Generator</mat-toolbar>
+
+<mat-form-field appearance="fill">
+  <mat-label>Choose an option</mat-label>
+  <mat-select>
+    <mat-option value="SimpleERC20">SimpleERC20</mat-option>
+    <mat-option value="option2" disabled>Option 2 (disabled)</mat-option>
+    <mat-option value="option3">Option 3</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<form (ngSubmit)="deploy()" [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Token Name</mat-label>
+    <input
+      matInput
+      placeholder="Silver Token"
+      type="text"
+      formControlName="name"
+      required
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Token symbol</mat-label>
+    <input
+      matInput
+      placeholder="AG"
+      type="text"
+      formControlName="symbol"
+      required
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Total Supply</mat-label>
+    <input
+      matInput
+      placeholder="AG"
+      type="number"
+      formControlName="supply"
+      required
+    />
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    [disabled]="!form.valid"
+    color="primary"
+    type="submit"
+  >
+    Deploy
+  </button>
+</form>
+
+<p *ngIf="transactionHash">{{ transactionHash | json }}</p>
+
+<p *ngIf="contractAddress">{{ contractAddress }}</p>
